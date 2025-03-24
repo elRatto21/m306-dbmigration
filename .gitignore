@@ -1,1 +1,7 @@
 /convert/node_modules
+convert/senaycasino.games.json
+convert/senaycasino.gamesessions.json
+convert/sql-games.csv
+convert/sql-users.csv
+convert/senaycasino.users.json
+convert/sql-gamesessions.csv
