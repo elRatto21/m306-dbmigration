@@ -9,7 +9,7 @@ const sequelize = new Sequelize(
   {
     host: config.development.host,
     dialect: config.development.dialect,
-    port: 3309,
+    port: 3306,
   }
 );
 

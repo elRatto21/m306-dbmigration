@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    networks:
+      - senaycasino-network
+
+  m306-mysql:
+    image: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=RohrKabel06
+      - MYSQL_DATABASE=senaycasino
+      - MYSQL_USER=readwrite
+      - MYSQL_PASSWORD=RohrKabel05
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./mysql/init:/docker-entrypoint-initdb.d
+    networks:
+      - senaycasino-network
+
+volumes:
+  mysql-data:
+
+networks:
+  senaycasino-network:
+    driver: bridge

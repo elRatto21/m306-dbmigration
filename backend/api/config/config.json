@@ -3,7 +3,7 @@
       "username": "root",
       "password": "RohrKabel06",
       "database": "senaycasino",
-      "host": "127.0.0.1",
+      "host": "m306-mysql",
       "dialect": "mysql"
     }
   }
