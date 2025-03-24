@@ -1,48 +1,37 @@
-// Game.js
-const { DataTypes } = require("sequelize");
-const sequelize = require("../config/database");
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const Game = sequelize.define(
-  "Game",
-  {
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    description: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-    },
-    minPlayers: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    maxPlayers: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    minBet: {
-      type: DataTypes.DOUBLE,
-      allowNull: false,
-    },
-    maxBet: {
-      type: DataTypes.DOUBLE,
-      allowNull: false,
-    },
-    enabled: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: true,
-    },
-    createdAt: {
-      type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW,
-    },
-    updatedAt: {
-      type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW,
-    },
+const GameSchema = new Schema({
+  name: {
+    type: String,
+    required: true
   },
-  {}
-);
+  description: {
+    type: String,
+    required: true
+  },
+  minPlayers: {
+    type: Number,
+    required: true
+  },
+  maxPlayers: {
+    type: Number,
+    required: true
+  },
+  minBet: {
+    type: Number,
+    required: true
+  },
+  maxBet: {
+    type: Number,
+    required: true
+  },
+  enabled: {
+    type: Boolean,
+    default: true
+  }
+}, {
+  timestamps: true
+});
 
-module.exports = Game;
+module.exports = mongoose.model('Game', GameSchema);

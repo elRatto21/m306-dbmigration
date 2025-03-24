@@ -1,16 +1,21 @@
-// database.js
-const { Sequelize } = require("sequelize");
-const config = require("./config.json");
+const mongoose = require('mongoose');
+const config = require('./config.json');
 
-const sequelize = new Sequelize(
-  config.development.database,
-  config.development.username,
-  config.development.password,
-  {
-    host: config.development.host,
-    dialect: config.development.dialect,
-    port: 3306,
+const connectDB = async () => {
+  try {
+    const mongoURI = `mongodb://${config.development.username}:${config.development.password}@${config.development.host}:${config.development.port || 27017}/${config.development.database}`;
+    
+    await mongoose.connect(mongoURI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      authSource: 'admin'
+    });
+    
+    console.log('MongoDB connected successfully');
+  } catch (error) {
+    console.error('MongoDB connection error:', error);
+    process.exit(1);
   }
-);
+};
 
-module.exports = sequelize;
+module.exports = connectDB;

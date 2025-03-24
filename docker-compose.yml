@@ -10,23 +10,22 @@ services:
     networks:
       - senaycasino-network
 
-  m306-mysql:
-    image: mysql
+  m306-mongodb:
+    image: mongo
     ports:
-      - "3306:3306"
+      - "27017:27017"
     environment:
-      - MYSQL_ROOT_PASSWORD=RohrKabel06
-      - MYSQL_DATABASE=senaycasino
-      - MYSQL_USER=readwrite
-      - MYSQL_PASSWORD=RohrKabel05
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: RohrKabel06
+      MONGO_INITDB_DATABASE: senaycasino
     volumes:
-      - mysql-data:/var/lib/mysql
-      - ./mysql/init:/docker-entrypoint-initdb.d
+      - mongodb-data:/data/db
+      - ./mongodb/init:/docker-entrypoint-initdb.d
     networks:
       - senaycasino-network
 
 volumes:
-  mysql-data:
+  mongodb-data:
 
 networks:
   senaycasino-network:

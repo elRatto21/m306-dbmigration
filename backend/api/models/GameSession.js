@@ -1,36 +1,29 @@
-// GameSession.js
-const { DataTypes } = require("sequelize");
-const sequelize = require("../config/database");
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const GameSession = sequelize.define(
-  "GameSession",
-  {
-    gameId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    userId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    bet: {
-      type: DataTypes.DOUBLE,
-      allowNull: false,
-    },
-    win: {
-      type: DataTypes.DOUBLE,
-      allowNull: false,
-    },
-    createdAt: {
-      type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW,
-    },
-    updatedAt: {
-      type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW,
-    },
+const GameSessionSchema = new Schema({
+  gameId: {
+    type: Schema.Types.ObjectId,
+    ref: 'Game',
+    required: true
   },
-  {}
-);
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
+  bet: {
+    type: Number,
+    required: true
+  },
+  win: {
+    type: Number,
+    required: true
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  }
+});
 
-module.exports = GameSession;
+module.exports = mongoose.model('GameSession', GameSessionSchema);

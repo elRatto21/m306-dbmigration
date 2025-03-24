@@ -1,33 +1,22 @@
-// User.js
-const { DataTypes } = require("sequelize");
-const sequelize = require("../config/database");
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const User = sequelize.define(
-  "User",
-  {
-    username: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-    },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    balance: {
-      type: DataTypes.DOUBLE,
-      defaultValue: 2000.0,
-    },
-    createdAt: {
-      type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW,
-    },
-    updatedAt: {
-      type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW,
-    },
+const UserSchema = new Schema({
+  username: {
+    type: String,
+    required: true,
+    unique: true
   },
-  {}
-);
+  password: {
+    type: String,
+    required: true
+  },
+  balance: {
+    type: Number,
+    default: 2000.0
+  }
+}, {
+  timestamps: true
+});
 
-module.exports = User;
+module.exports = mongoose.model('User', UserSchema);
