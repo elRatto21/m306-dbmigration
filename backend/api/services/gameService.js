@@ -1,5 +1,7 @@
 const Game = require("../models/Game");
 
-const register = async (username, password) => {
+const getGames = async () => {
     return Game.findAll();
   };
+
+module.exports = { getGames };
