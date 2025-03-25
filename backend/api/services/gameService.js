@@ -1,7 +1,7 @@
 const Game = require("../models/Game");
 
 const getGames = async () => {
-    return Game.findAll();
+    return Game.find({});
   };
 
 module.exports = { getGames };
